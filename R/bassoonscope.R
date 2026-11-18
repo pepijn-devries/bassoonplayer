@@ -12,7 +12,7 @@
 #' @param elementId Optional HTML element ID for the oscilloscope container.
 #' @returns TODO
 #' @examples
-#' if (interactive() && requireNamespace("htmltools)) {
+#' if (interactive() && requireNamespace("htmltools")) {
 #'   fl <- system.file("cyberrid", "cyberrid.mod", package = "bassoonplayer")
 #'   htmltools::browsable(
 #'     htmltools::tagList(

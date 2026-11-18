@@ -31,3 +31,16 @@ TODO
 Renders a real-time Web Audio oscilloscope bound to an existing
 \code{\link{bassoonplayer}} widget.
 }
+\examples{
+if (interactive() && requireNamespace("htmltools")) {
+  fl <- system.file("cyberrid", "cyberrid.mod", package = "bassoonplayer")
+  htmltools::browsable(
+    htmltools::tagList(
+      bassoonplayer("C:/Users/vries171/Downloads/cyberrid.mod",
+                    labels = list(play = "pl", pause = "pa", stop = "sp"),
+                    elementId = "my_player"),
+      bassoonscope(playerId = "my_player", width = 300, height = 80)
+    )
+  )
+}
+}

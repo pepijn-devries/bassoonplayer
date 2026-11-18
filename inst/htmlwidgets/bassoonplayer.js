@@ -15,18 +15,46 @@ HTMLWidgets.widget({
       pause: 'Pause',
       stop: 'Stop'
     };
+    let bpclass = 'bassoon-btn btn btn-sm';
     
     el.innerHTML = `
       <div class="bassoon-player">
-        <button type="button" class="bp-btn bp-play btn btn-sm btn-primary">${labels.play}</button>
-        <button type="button" class="bp-btn bp-stop btn btn-sm btn-outline-secondary">${labels.stop}</button>
-        <span class="bp-title">Ready</span>
+        <button type="button" class="bp-play ${bpclass}">${labels.play}</button>
+        <button type="button" class="bp-stop ${bpclass}">${labels.stop}</button>
+        <span class="bassoon-title">Ready</span>
       </div>
     `;
 
     const playBtn = el.querySelector('.bp-play');
     const stopBtn = el.querySelector('.bp-stop');
-    const titleSpan = el.querySelector('.bp-title');
+    const titleSpan = el.querySelector('.bassoon-title');
+
+    function syncSamplesToShiny() {
+      if (!window.Shiny) return;
+    
+      const sendInstruments = () => {
+        const tkr = window.BassoonRegistry[playerId]?.tracker;
+        if (!tkr) return;
+        const sng = tkr.getSong();
+        if (!sng || !sng.instruments) return;
+    
+        const cleanInstruments = sng.instruments.map((inst, idx) => ({
+          index: idx,
+          name: inst.name || '',
+          volume: inst.volume,
+          finetune: inst.finetune,
+          sampleLength: inst.sample ? inst.sample.length : 0
+        }));
+    
+        Shiny.setInputValue(playerId + '_instruments', JSON.stringify(cleanInstruments));
+      };
+    
+      if (window.Shiny && Shiny.shinyapp && Shiny.shinyapp.$socket) {
+        sendInstruments();
+      } else {
+        $(document).one('shiny:sessioninitialized', sendInstruments);
+      }
+    }
 
     function registerPlayerReady() {
       window.BassoonRegistry[playerId] = {
@@ -40,7 +68,13 @@ HTMLWidgets.widget({
 
     async function ensureLoaded() {
       if (!moduleDataUrl) return false;
+    
+      if (typeof BassoonTracker.init === 'function' && !BassoonTracker.audio?.context) {
+        await BassoonTracker.init();
+      }
+    
       await BassoonTracker.load(moduleDataUrl);
+      
       const song = BassoonTracker.getSong();
       if (song && song.title) {
         titleSpan.textContent = song.title;
@@ -48,13 +82,13 @@ HTMLWidgets.widget({
       isLoaded = true;
       window.BassoonActivePlayer = playerId;
       registerPlayerReady();
+      syncSamplesToShiny();
       return true;
     }
 
     playBtn.addEventListener('click', async function() {
       if (!moduleDataUrl) return;
 
-      // Reload if not yet loaded, or if another player widget took over the global engine
       if (!isLoaded || window.BassoonActivePlayer !== playerId) {
         await ensureLoaded();
       }
@@ -89,18 +123,25 @@ HTMLWidgets.widget({
 
     return {
       renderValue: async function(x) {
+        if (document.readyState === 'complete') {
+          await ensureLoaded();
+        } else {
+          window.addEventListener('load', () => ensureLoaded(), { once: true });
+        }
         moduleDataUrl = x.data;
         isLoaded = false;
         titleSpan.textContent = x.filename || 'Module loaded';
         
-        console.log('TODO' + x.labels.play);
         labels.play = x.labels.play || 'Play';
         labels.pause = x.labels.pause || 'Pause';
         labels.stop = x.labels.stop || 'Stop';
+        bpclass = x.class || 'bassoon-btn btn btn-sm';
 
         playBtn.textContent = labels.play;
         stopBtn.textContent = labels.stop;
-        
+        playBtn.className = bpclass;
+        stopBtn.className = bpclass;
+
         if (BassoonTracker.isPlaying() && window.BassoonActivePlayer === playerId) {
           if (BassoonTracker.audio?.context?.state === 'suspended') {
             await BassoonTracker.audio.context.resume();

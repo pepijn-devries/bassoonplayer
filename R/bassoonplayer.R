@@ -5,6 +5,7 @@
 #' @param file TODO
 #' @param width,height TODO
 #' @param labels TODO
+#' @param class TODO
 #' @param elementId TODO
 #' @param ... TODO
 #' @returns TODO
@@ -17,6 +18,7 @@
 bassoonplayer <- function(
     file, width = NULL, height = "50px",
     labels = list(play = "Play", pause = "Pause", stop = "Stop"),
+    class = "bassoon-btn btn btn-sm",
     elementId = NULL, ...) {
   if (is.character(file) && file.exists(file)) {
     raw_bytes <- readBin(file, what = "raw", n = file.info(file)$size)

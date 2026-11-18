@@ -9,6 +9,7 @@ bassoonplayer(
   width = NULL,
   height = "50px",
   labels = list(play = "Play", pause = "Pause", stop = "Stop"),
+  class = "bassoon-btn btn btn-sm",
   elementId = NULL,
   ...
 )
@@ -19,6 +20,8 @@ bassoonplayer(
 \item{width, height}{TODO}
 
 \item{labels}{TODO}
+
+\item{class}{TODO}
 
 \item{elementId}{TODO}
 
