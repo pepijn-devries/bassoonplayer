@@ -1,4 +1,7 @@
 .bassoon-player {
+  display: flex;
+  width: 100%;
+  gap: 8px;
   font-family: var(--bs-body-font-family, system-ui, -apple-system, sans-serif);
   padding: 8px 12px;
   border: 1px solid var(--bs-border-color, #dee2e6);
@@ -8,6 +11,11 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+}
+
+.bassoon-player > * {
+  flex: 1;
+  min-width: 0;
 }
 
 .bassoon-btn:not(.btn) {

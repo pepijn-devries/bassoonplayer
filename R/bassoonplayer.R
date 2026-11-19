@@ -16,7 +16,7 @@
 #' }
 #' @export
 bassoonplayer <- function(
-    file, width = NULL, height = "50px",
+    file, width = "200px", height = "50px",
     labels = list(play = "Play", pause = "Pause", stop = "Stop"),
     class = "bassoon-btn btn btn-sm",
     elementId = NULL, ...) {
@@ -66,7 +66,7 @@ bassoonplayer <- function(
 #' @name bassoonplayer-shiny
 #'
 #' @export
-bassoonplayerOutput <- function(outputId, width = '100%', height = '50px'){
+bassoonplayerOutput <- function(outputId, width = '200px', height = '50px'){
   htmlwidgets::shinyWidgetOutput(outputId, 'bassoonplayer', width, height, package = 'bassoonplayer')
 }
 

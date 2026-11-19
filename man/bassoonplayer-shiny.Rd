@@ -6,7 +6,7 @@
 \alias{renderBassoonplayer}
 \title{Shiny bindings for bassoonplayer}
 \usage{
-bassoonplayerOutput(outputId, width = "100\%", height = "50px")
+bassoonplayerOutput(outputId, width = "200px", height = "50px")
 
 renderBassoonplayer(expr, env = parent.frame(), quoted = FALSE)
 }

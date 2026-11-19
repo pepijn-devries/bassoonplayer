@@ -1,5 +1,37 @@
 window.BassoonRegistry = window.BassoonRegistry || {};
 
+(function() {
+  function registerBassoonHandler() {
+    if (window.Shiny && Shiny.addCustomMessageHandler) {
+      Shiny.addCustomMessageHandler('get_bassoon_position', function(message) {
+        console.log("Handler triggered with message:", message);
+        
+        const tkr = window.BassoonRegistry[message.id]?.tracker;
+
+        if (tkr) {
+          var stat = tkr.getStateAtTime(tkr.audio.context.currentTime);
+          Shiny.setInputValue(
+            message.id + '_position',
+            {
+              pattern_pos: stat.patternPos,
+              song_pos: stat.songPos
+            },
+            { priority: "event" }
+          );
+        } else {
+          console.warn("Player instance not found on element:", message.id);
+        }
+      });
+    }
+  }
+
+  if (window.Shiny) {
+    registerBassoonHandler();
+  } else {
+    document.addEventListener('shiny:connected', registerBassoonHandler);
+  }
+})();
+
 HTMLWidgets.widget({
 
   name: 'bassoonplayer',
@@ -62,7 +94,6 @@ HTMLWidgets.widget({
         audio: BassoonTracker.audio,
         isLoaded: true
       };
-      // Notify any bound visualizer widgets waiting on this playerId
       window.dispatchEvent(new CustomEvent('bassoon:ready', { detail: { playerId } }));
     }
 

@@ -6,7 +6,7 @@
 \usage{
 bassoonplayer(
   file,
-  width = NULL,
+  width = "200px",
   height = "50px",
   labels = list(play = "Play", pause = "Pause", stop = "Stop"),
   class = "bassoon-btn btn btn-sm",
