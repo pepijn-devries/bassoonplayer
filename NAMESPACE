@@ -2,7 +2,10 @@
 
 export(bassoonplayer)
 export(bassoonplayerOutput)
+export(bassoonsample)
+export(bassoonsampleOutput)
 export(bassoonscope)
 export(bassoonscopeOutput)
 export(renderBassoonplayer)
+export(renderBassoonsample)
 export(renderBassoonscope)

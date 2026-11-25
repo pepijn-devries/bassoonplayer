@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# bassoonplayer
+# bassoonplayer <img src="man/figures/logo.svg" align="right" height="139" alt="" />
 
 Wraps the core functions of the [BassoonTracker
 JavaScript](https://github.com/steffest/bassoontracker) by
