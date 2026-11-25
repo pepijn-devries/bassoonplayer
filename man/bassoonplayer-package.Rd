@@ -5,7 +5,18 @@
 \alias{bassoonplayer-package}
 \title{bassoonplayer: bassoonplayer: An HTML Widget That Plays Mod Tracker Files}
 \description{
+\if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
+
 TODO.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://pepijn-devries.github.io/bassoonplayer/}
+  \item \url{https://github.com/pepijn-devries/bassoonplayer/}
+  \item Report bugs at \url{https://github.com/pepijn-devries/bassoonplayer/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Pepijn de Vries \email{pepijn.devries@outlook.com} (\href{https://orcid.org/0000-0002-7961-6646}{ORCID})
