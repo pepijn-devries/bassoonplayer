@@ -1,0 +1,12 @@
+.bassoon-sample {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid #2a3240;
+
+  --sample-bg: #14181f;
+  --sample-grid: #2a3240;
+  --sample-wave: #4ade80;
+  --sample-line-width: 1.5;
+}

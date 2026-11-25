@@ -1,0 +1,9 @@
+dependencies:
+  - name: bassoonplayer
+    version: 0.5.0.5
+    src: htmlwidgets/lib
+    script: bassoonplayer.js
+  - name: bassoonplayer-css
+    version: 0.1.0
+    src: htmlwidgets
+    stylesheet: bassoonplayer.css

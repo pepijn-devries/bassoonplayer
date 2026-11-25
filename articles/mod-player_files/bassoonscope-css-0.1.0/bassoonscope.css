@@ -1,0 +1,12 @@
+.bassoon-scope {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid #2a3240;
+
+  --scope-bg: #14181f;
+  --scope-grid: #2a3240;
+  --scope-wave: #4ade80;
+  --scope-line-width: 1.5;
+}

@@ -49,3 +49,9 @@ bassoonplayer(mod_file)
 - [`bassoonscope()`](https://pepijn-devries.github.io/bassoonplayer/reference/bassoonscope.md)
   : Oscilloscope Visualiser for BassoonTracker
 
+# Articles
+
+### All vignettes
+
+- [A Mod
+  Player](https://pepijn-devries.github.io/bassoonplayer/articles/mod-player.md):
